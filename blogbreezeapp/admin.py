@@ -6,6 +6,6 @@ from .models import Blog
 # Register your models here.
 
 class blogadmin(admin.ModelAdmin):
-  list_display = ("title", "publishdate",)
+  list_display = ("title", "publishdate", "authorid")
   
 admin.site.register(Blog, blogadmin)

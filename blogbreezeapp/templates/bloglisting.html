@@ -1,33 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <title>Blog Breeze</title>
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2">
-                        <p>Blog Breeze</p>
-                    </div>
-                    <div class="col-md-8">
-                        <ul>
-                            <li>Home</li>
-                            <li>Blogs</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
+{% include 'header.html' %}
 
         <section class="blog-listing">
             <div class="container">
                 <div class="row">
                     {% for x in blogs %}
                     <div class="col-md-3">
+                        <div class ="sn_number">{{ forloop.counter }}</div>
                         <div class="title">
                             <h3>{{x.title}}</h3>
                         </div>
@@ -35,11 +13,10 @@
                             <span>{{x.publishdate}}</span>
                         </div>
                     </div>
+                    {% empty %}
+                    <p>No members</p>
                     {% endfor %}
                 </div>
             </div>
         </section>
-        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
-    </body>
-</html>
+{% include 'footer.html' %}
