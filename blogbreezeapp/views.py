@@ -14,3 +14,7 @@ def bloglistingloader(request):
     'blogs': blogs,
   }
   return HttpResponse(template.render(context, request))
+
+def contactpageloader(request):
+  template = loader.get_template('contact.html')
+  return HttpResponse(template.render())
