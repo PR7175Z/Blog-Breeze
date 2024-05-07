@@ -4,8 +4,12 @@ from .models import Blog
 from django.shortcuts import render
 
 def indexpageloader(request):
+  blogs = Blog.objects.all().values()
   template = loader.get_template('index.html')
-  return HttpResponse(template.render())
+  context = {
+    'blogs': blogs,
+  }
+  return HttpResponse(template.render(context, request))
 
 def bloglistingloader(request):
   blogs = Blog.objects.all().values()

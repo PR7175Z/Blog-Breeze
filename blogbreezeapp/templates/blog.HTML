@@ -1,4 +1,135 @@
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>new-website</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="css/all.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="logo-brand">
+                        <a href="#" title="">
+                            <img src="images/logo.png" alt="">
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <ul class="header-contact d-flex justify-content-end list-none">
+                        <li>
+                            <a href="#" title="" class="d-flex align-items-center">
+                                <span>Enquire</span>
+                                <i class="fas icon-email"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" title="">
+                                <span>Call Us</span>
+                                <i class="fas icon-call"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-header primary-bg">
+        <div class="container">
+            <div class="menu-wrap">
+                <div class="overflow-menu">
+                    <ul class="primary-menu">
+                        <li><a href="" title="">Home</a></li>
+                        <li><a href="" title="">About</a></li>
+                        <li><a href="" title="">Tours</a></li>
+                        <li><a href="" title="">Treks</a></li>
+                        <li><a href="" title="">Destinations</a></li>
+                        <li><a href="" title="">Blogs</a></li>
+                        <li><a href="" title="">Gallery</a></li>
+                        <li><a href="" title="">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="inner-banner  align-items-center d-flex" style="background-image: url('images/banner.png')">
+    <div class="container position-relative">
+        <h1>BLOGS</h1>
+    </div>
+</section>
+
+
+<section class="blog-section section-gaps light-white-bg">
+    <div class="container">
+
+        <div class="trek-list-box trek-list-box-slider blog-lists">
+
+            <div class="item">
+                <div class="img-holder">
+                    <a href="#" title="" class="h-100 d-block">
+                        <img src="images/place2.png" alt="" class="img-cover">
+
+                    </a>
+                </div>
+                <div class="content">
+                    <ul class="trek-info list-none">
+                        <li>
+                            <span>
+                                <i></i>
+                                60 day
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i></i>
+                                Aspiration Asia
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="text">
+                        <h3 class="title mb-2">
+                            Mount Everest Nepal
+                        </h3>
+
+                        <p>
+                            Climbing on top of one of the world’s most dangerous mountains requires a lot of experience,
+                            preparation and dedication but is equally rewarding experience....
+                        </p>
+                        <div class="btn-wrap">
+                            <a href="#" title="" class="border-btn med dark">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<section class="above-footer">
+    <div class="image">
+        <img src="images/footer-logo.png" alt="">
+    </div>
+</section>
+
+
+
 <footer class="site-footer text-white">
     <div class="top-footer">
         <div class="container">
@@ -7,8 +138,8 @@
                 <div class="col-md-3">
                     <div class="item">
                         <div class="footer-logo">
-                            <a href="{% url 'home' %}" title="">
-                                <img src="{% static 'images/logo.png' %}" alt="">
+                            <a href="index.php" title="">
+                                <img src="images/logo.png" alt="">
                             </a>
                         </div>
                         <div class="about-content pe-5">
@@ -146,13 +277,13 @@
     </div>
 </footer>
 
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}"></script>
-<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
-<script src="{% static 'js/wow.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.js' %}js/jquery.fancybox.js"></script>
-<script src="{% static 'js/bootstrap.js' %}js/slick.js"></script>
-<script src="{% static 'js/script.js' %}"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/slick.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>

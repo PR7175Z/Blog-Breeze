@@ -1,25 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Blog Breeze</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
     </head>
     <body>
-        <header>
+    <header class="site-header">
+        <div class="top-header">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-2">
-                        <p>Blog Breeze</p>
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="logo-brand">
+                            <a href="#" title="">
+                                <img src="{% static 'images/logo.png' %}" alt="">
+                            </a>
+                        </div>
                     </div>
                     <div class="col-md-8">
-                        <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'blog' %}">Blogs</a></li>
-                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <ul class="header-contact d-flex justify-content-end list-none">
+                            <li>
+                                <a href="#" title="" class="d-flex align-items-center">
+                                    <span>Enquire</span>
+                                    <i class="fas icon-email"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" title="">
+                                    <span>Call Us</span>
+                                    <i class="fas icon-call"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+        <div class="bottom-header primary-bg">
+            <div class="container">
+                <div class="menu-wrap">
+                    <div class="overflow-menu">
+                        <ul class="primary-menu">
+                            <li><a href="{% url 'home' %}" title="">Home</a></li>
+                            <li><a href="" title="">About</a></li>
+                            <li><a href="" title="">Tours</a></li>
+                            <li><a href="" title="">Treks</a></li>
+                            <li><a href="" title="">Destinations</a></li>
+                            <li><a href="{% url 'blog' %}" title="">Blogs</a></li>
+                            <li><a href="" title="">Gallery</a></li>
+                            <li><a href="{% url 'contact' %}" title="">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>

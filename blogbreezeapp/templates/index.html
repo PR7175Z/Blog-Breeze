@@ -1,7 +1,103 @@
 {% include 'header.html' %} 
-
-<section>
-    <div>This is body</div>
+{% load static %}
+<section class="main-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
+    <div class="container position-relative">
+        <h2 class="mb-3">
+            Find Excitement wherever you go
+        </h2>
+        <h1>Discover your world</h1>
+        <div class="btn-warp mt-5">
+            <a href="#" title="" class="border-btn white">
+                Get Inspired
+            </a>
+        </div>
+    </div>
 </section>
-        
+
+<section class="blog-section section-gaps light-white-bg">
+    <div class="container">
+        <div class="main-title mb-4">
+            <h3 class="title text-uppercase">
+                Our Blogs
+            </h3>
+            <h2 class="sub-title text-uppercase mb-3">
+                Travel far enough, meet yourself
+            </h2>
+        </div>
+        <div class="trek-list-box trek-list-box-slider blog-lists">
+            {% for x in blogs %}
+            <div class="item">
+                <div class="img-holder">
+                    <a href="#" title="" class="h-100 d-block">
+                        <img src="images/place2.png" alt="" class="img-cover">
+                    </a>
+                </div>
+                <div class="content">
+                    <ul class="trek-info list-none">
+                        <li>
+                            <span>
+                                <i></i>
+                                60 day
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <i></i>
+                                Aspiration Asia
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="text">
+                        <h3 class="title mb-2">
+                            {{ x.title }}
+                        </h3>
+                        <p>
+                            Climbing on top of one of the world’s most dangerous mountains requires a lot of experience,
+                            preparation and dedication but is equally rewarding experience....
+                        </p>
+                        <div class="btn-wrap">
+                            <a href="#" title="" class="border-btn med dark">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="get-int-touch-section section-gaps">
+    <div class="container">
+        <div class="main-title mb-4 text-center">
+            <h2 class=" title text-capitalize mb-3">
+                Get special offers from Aspiration Asia
+            </h2>
+            <h3 class="sub-title text-uppercase">
+                Subscribe to see secret deals prices drop the moment you sign up!
+            </h3>
+        </div>
+        <div class="subscribe-form-sec">
+            <form action="">
+                <div class="d-flex mx-auto">
+                    <div class="input-field">
+                        <span class="wpcf7-form-control-wrap">
+                            <input type="email" class="subscribe-padding" placeholder="Email address">
+                        </span>
+                    </div>
+                    <div class="submit-btn">
+                        <input type="submit"  class="subscribe-padding" value="Subscribe">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="above-footer">
+    <div class="image">
+        <img src="images/footer-logo.png" alt="">
+    </div>
+</section>
 {% include 'footer.html' %} 
