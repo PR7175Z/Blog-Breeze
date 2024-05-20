@@ -51,10 +51,7 @@
                         <h3 class="title mb-2">
                             {{ x.title }}
                         </h3>
-                        <p>
-                            Climbing on top of one of the world’s most dangerous mountains requires a lot of experience,
-                            preparation and dedication but is equally rewarding experience....
-                        </p>
+                        {{ x.content|safe }}
                         <div class="btn-wrap">
                             <a href="#" title="" class="border-btn med dark">
                                 Learn More
