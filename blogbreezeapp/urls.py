@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.indexpageloader, name='home'),
     path('blog', views.bloglistingloader, name='blog'),
     path('contact', views.contactpageloader, name='contact'),
-    
+    path('blog/<int:id>', views.details, name='details'),
 ]

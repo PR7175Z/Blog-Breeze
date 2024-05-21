@@ -19,6 +19,14 @@ def bloglistingloader(request):
   }
   return HttpResponse(template.render(context, request))
 
+def details(request, id):
+  blogsingle = Blog.objects.get(id=id)
+  template = loader.get_template('blogsingle.html')
+  context = {
+    'blogsingle': blogsingle,
+  }
+  return HttpResponse(template.render(context, request))
+
 def contactpageloader(request):
   template = loader.get_template('contact.html')
   return HttpResponse(template.render())
