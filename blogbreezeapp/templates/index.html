@@ -1,5 +1,6 @@
 {% include 'header.html' %} 
 {% load static %}
+{% load blog_func %}
 <section class="main-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
     <div class="container position-relative">
         <h2 class="mb-3">
@@ -36,8 +37,8 @@
                     <ul class="trek-info list-none">
                         <li>
                             <span>
-                                <i></i>
-                                60 day
+                                <strong>Published: </strong>
+                                {{ x.publishdate | dayssince }}
                             </span>
                         </li>
                         <li>
