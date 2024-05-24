@@ -4,7 +4,7 @@ from .models import Blog
 from django.shortcuts import render
 
 def indexpageloader(request):
-  blogs = Blog.objects.all().order_by('-publishdate').values()
+  blogs = Blog.objects.all().order_by('-publishdate')
   template = loader.get_template('index.html')
   context = {
     'blogs': blogs,
@@ -12,14 +12,14 @@ def indexpageloader(request):
   return HttpResponse(template.render(context, request))
 
 def bloglistingloader(request):
-  blogs = Blog.objects.all().order_by('-publishdate').values()
+  blogs = Blog.objects.all().order_by('-publishdate')
   template = loader.get_template('bloglisting.html')
   context = {
     'blogs': blogs,
   }
   return HttpResponse(template.render(context, request))
 
-def details(request, id):
+def blogsingle(request, id):
   blogsingle = Blog.objects.get(id=id)
   other_blogs = Blog.objects.exclude(id=id).order_by('?')[:3]
   template = loader.get_template('blogsingle.html')

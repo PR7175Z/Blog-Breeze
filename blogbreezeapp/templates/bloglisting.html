@@ -4,13 +4,7 @@
             <div class="row">
                 {% for x in blogs %}
                 <div class="col-md-3">
-                    <div class ="sn_number">{{ forloop.counter }}</div>
-                    <div class="title">
-                        <h3>{{x.title}}</h3>
-                    </div>
-                    <div class="published-date">
-                        <span>{{x.publishdate}}</span>
-                    </div>
+                    {% include 'blog-content.html' %}
                 </div>
                 {% empty %}
                 <p>No members</p>

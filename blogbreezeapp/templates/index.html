@@ -1,6 +1,5 @@
 {% include 'header.html' %} 
 {% load static %}
-{% load blog_func %}
 <section class="main-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
     <div class="container position-relative">
         <h2 class="mb-3">
@@ -25,41 +24,10 @@
                 Travel far enough, meet yourself
             </h2>
         </div>
-        <div class="trek-list-box trek-list-box-slider blog-lists">
+        <div class="trek-list-box trek-list-box-slider blog-lists row">
             {% for x in blogs %}
-            <div class="item">
-                <div class="img-holder">
-                    <a href="/blog/{{x.id}}" title="" class="h-100 d-block">
-                        <img src="{{ x.featuredimage }}" alt="" class="img-cover">
-                    </a>
-                </div>
-                <div class="content">
-                    <ul class="trek-info list-none">
-                        <li>
-                            <span>
-                                <strong>Published: </strong>
-                                {{ x.publishdate | dayssince }}
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i></i>
-                                Aspiration Asia
-                            </span>
-                        </li>
-                    </ul>
-                    <div class="text">
-                        <h3 class="title mb-2">
-                            {{ x.title }}
-                        </h3>
-                        {{ x.content|safe }}
-                        <div class="btn-wrap">
-                            <a href="/blog/{{x.id}}" title="" class="border-btn med dark">
-                                Learn More
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                {% include 'blog-content.html' %}
             </div>
             {% endfor %}
         </div>
