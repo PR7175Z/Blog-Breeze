@@ -1,0 +1,35 @@
+{% load blog_func %}
+<div class="item">
+    <div class="img-holder">
+        <a href="/blog/{{x.id}}" title="" class="h-100 d-block">
+            <img src="{{ x.featuredimage.url }}" alt="" class="img-cover">
+        </a>
+    </div>
+    <div class="content">
+        <ul class="trek-info list-none">
+            <li>
+                <span>
+                    <strong>Published: </strong>
+                    {{ x.publishdate | dayssince }}
+                </span>
+            </li>
+            <li>
+                <span>
+                    <i></i>
+                    {{ x.category }}
+                </span>
+            </li>
+        </ul>
+        <div class="text">
+            <h3 class="title mb-2">
+                {{ x.title }}
+            </h3>
+            {{ x.content|safe | truncatewords:40}}
+            <div class="btn-wrap">
+                <a href="/blog/{{x.id}}" title="" class="border-btn med dark">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
