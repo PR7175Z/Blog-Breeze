@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.contrib.auth.models import User
 
 class Category(models.Model):
   name = models.CharField(max_length=30)
@@ -10,6 +11,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
   title = models.CharField(max_length=255)
+  slug = models.SlugField(default="", null=False)
   publishdate = models.DateTimeField(auto_now_add=True)
   authorid = models.IntegerField(default=0)
   featuredimage = models.ImageField(upload_to ='uploads/', default=0) 

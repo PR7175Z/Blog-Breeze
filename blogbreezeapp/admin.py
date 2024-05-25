@@ -7,6 +7,7 @@ from .models import Blog, Category
 
 class blogadmin(admin.ModelAdmin):
   list_display = ("title", "publishdate", "authorid")
+  prepopulated_fields = {"slug": ("title",)}
   
 admin.site.register(Blog, blogadmin)
 
