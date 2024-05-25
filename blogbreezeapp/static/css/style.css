@@ -1057,10 +1057,14 @@ ul.header-contact {
     border: 3px solid #bcbcbc;
     border-left: none;
     border-right: none;
-    padding-right: 20px;
 }
 .blog-content .text{
     padding-right: 10px;
     color: #3a3a3a;
 }
 /*End Blogs Single Page css*/
+
+
+.share-social-links > li:not(:first-child){
+    font-size: 20px;
+}
