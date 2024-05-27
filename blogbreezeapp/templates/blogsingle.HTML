@@ -9,44 +9,23 @@
             </div>
             <div class="content ">
                 <ul class="blog-info list-none d-flex justify-content-between">
+
                     <li>
-                        <ul class="list-none d-flex gap-custom">
-                            <li>
-                                <span>
-                                <i class="icon-date pe-1"></i>
-                                    {{blogsingle.publishdate|date:"M d, Y"}}
-                                </span>
-                            </li>
-                            <li>
-                                <span>
-                                    <i class="icon-author pe-1"></i>
-                                    {{ blogsingle.category }}
-                                </span>
-                            </li>
-                        </ul>
+                        <span>
+                            <i class="far fa-calendar pe-1"></i>
+                            {{blogsingle.publishdate|date:"M d, Y"}}
+                        </span>
                     </li>
                     <li>
-                        <ul class="share-social-links list-none d-flex gap-3">
-                            <li class="d-flex align-items-baseline">
-                                <i class="fas fa-share-alt pe-2"></i>
-                                <p>Share :</p>
-                            </li>
-                            <li>
-                                <a href="#" title="" target="_blank">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" title="" target="_blank">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <span>
+                            {{ blogsingle.category }}
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <i class="fas fa-user pe-1"></i>
+                            {{ blogsingle.category }}
+                        </span>
                     </li>
                 </ul>
                 <div class="image">
@@ -54,6 +33,29 @@
                 </div>
                 <div class="text">
                     {{blogsingle.content|safe}}
+                </div>
+                <div>
+                    <ul class="share-social-links list-none d-flex gap-3">
+                        <li class="d-flex align-items-baseline">
+                            <i class="fas fa-share-alt pe-2"></i>
+                            <p>Share :</p>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="" target="_blank">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
