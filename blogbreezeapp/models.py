@@ -20,3 +20,13 @@ class Blog(models.Model):
 
   def __str__(self):
     return f'{self.title}'
+  
+class User(models.Model):
+  username = models.CharField(max_length=50, default='')
+  first_name = models.CharField(max_length=50, default='')
+  last_name = models.CharField(max_length=50, default='')
+  password = models.CharField(max_length=50, default='')
+  profilepic = models.ImageField(upload_to ='uploads/', default=0) 
+
+  def __str__(self):
+    return f'{self.username}'
