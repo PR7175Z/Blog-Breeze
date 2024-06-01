@@ -16,7 +16,7 @@ class blogcategory(admin.ModelAdmin):
   
 admin.site.register(Category, blogcategory)
 
-class userlist(admin.ModelAdmin):
-  list_display = ("first_name", "last_name")
+# class userlist(admin.ModelAdmin):
+#   list_display = ("first_name", "last_name")
   
-admin.site.register(User, userlist)
+# admin.site.register(User, userlist)
