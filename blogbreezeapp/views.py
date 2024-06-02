@@ -32,3 +32,7 @@ def blogsingle(request, id):
 def contactpageloader(request):
   template = loader.get_template('contact.html')
   return HttpResponse(template.render())
+
+def login(requiest):
+  template = loader.get_template('login.html')
+  return HttpResponse(template.render())
