@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Category, User
+from .models import Blog, Category
 
 # admin.site.register(Blog)
 
@@ -15,8 +15,3 @@ class blogcategory(admin.ModelAdmin):
   list_display = ("name", "content")
   
 admin.site.register(Category, blogcategory)
-
-class userlist(admin.ModelAdmin):
-  list_display = ("first_name", "last_name")
-  
-admin.site.register(User, userlist)

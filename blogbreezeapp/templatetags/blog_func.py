@@ -1,6 +1,6 @@
 from django import template
 from django.utils.timezone import now
-from datetime import timedelta
+# from datetime import timedelta
 
 register = template.Library()
 

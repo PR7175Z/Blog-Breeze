@@ -1,0 +1,25 @@
+{% include 'header-blank.html' %} 
+{% load static %}
+<section class="signup-form">
+    <div class="container">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <div class="signup-form-wrapper">
+            <form action="/signup" method="post">
+                {% csrf_token %}
+                <input type="text" placeholder="First name" id="firstname" name="firstname">
+                <input type="text" placeholder="Last Name" id="lastname" name="lastname">
+                <input type="email" placeholder="Email" id="email" name="email">
+                <input type="text" placeholder="Phone" id="phone" name="phone">
+                <input type="text" placeholder="Username" id="username" name="username">
+                <input type="password" placeholder="Password" id="password" name="password">
+                <input type="submit" value="submit">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</section>
+{% include 'footer-blank.html' %}
