@@ -56,14 +56,14 @@ def login_view(request):
   else:
     return render (request,'login.html')
   
-
 def dashboard_view(request):
   if request.user.is_anonymous:
     return redirect('/login')
   else:
     try:
       current_user = request.user
-      messages.success(request, f'Hello {current_user}')
+      current_user_id = request.user.id
+      messages.success(request, f'Hello {current_user} {current_user_id}')
       return render(request,"dashboard.html")
     except Exception as e:
       messages.error(request, str(e))
@@ -105,3 +105,11 @@ def signup_view(request):
       return render (request,"signup.html")
   else:
     return render (request,'signup.html')
+
+def dashboardbloglist(request):
+  blogs = Blog.objects.all().order_by('-publishdate')
+  template = loader.get_template('dashboardblog.html')
+  context = {
+    'blogs': blogs,
+  }
+  return HttpResponse(template.render(context, request))

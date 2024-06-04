@@ -1,17 +1,14 @@
 {% include 'header.html' %}
-
+{% load static %}
 <section class="dashboard-cover">
     <div class="container">
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
         <div class="row">
             <div class="col-md-3">
                 {% include 'dash-nav.html' %}
             </div>
             <div class="col-md-9">
                 <div class="dashboard-wrapper">
-                    <p>This is dashboard</p>
+                    <p>This is dashboard blog</p>
                 </div>
             </div>
         </div>
