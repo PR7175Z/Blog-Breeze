@@ -7,8 +7,13 @@
                 {% include 'dash-nav.html' %}
             </div>
             <div class="col-md-9">
+                <div class="add-blog-btn">
+                    <a href="/addblog">Add blog</a>
+                </div>
                 <div class="dashboard-wrapper">
-                    <p>This is dashboard blog</p>
+                    {% for x in blogs %}
+                        {{ x.title }}
+                    {% endfor %}
                 </div>
             </div>
         </div>

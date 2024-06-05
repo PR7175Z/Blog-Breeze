@@ -107,9 +107,21 @@ def signup_view(request):
     return render (request,'signup.html')
 
 def dashboardbloglist(request):
-  blogs = Blog.objects.all().order_by('-publishdate')
+  user = request.user
+  blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
   template = loader.get_template('dashboardblog.html')
   context = {
     'blogs': blogs,
   }
   return HttpResponse(template.render(context, request))
+
+def addblogpageloader(request):
+  if request.method == 'POST':
+    try:
+      blogtitle = request.post.get('blogtitle')
+      blogcontent = request.post.get('content')
+      featureimage = request.post.get('featuredimage')
+    except:
+      return render(request, 'login.html')
+  template = loader.get_template('addblog.html')
+  return HttpResponse(template.render())

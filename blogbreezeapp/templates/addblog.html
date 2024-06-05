@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+{% load static %}
+<section class="add-blog-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'dash-nav.html' %}
+            </div>
+            <div class="col-md-9">
+                <div class="tilte">
+                    <h1>Add blog</h1>
+                </div>
+                <div class="add-blog-form-wrap">
+                    <form action="/addblog" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="blogtitle" id="blogtitle" placeholder="Title">
+                        <input type="file" name="featuredimage" id="featuredimage">
+                        <textarea id="content" name="content" placeholder="Content"></textarea>
+                        <input type="submit" value="Publish">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'footer.html' %}
