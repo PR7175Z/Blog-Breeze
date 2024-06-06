@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Blog
 from django.shortcuts import render, redirect
+import re
 
 def indexpageloader(request):
   blogs = Blog.objects.all().order_by('-publishdate')
@@ -83,7 +84,7 @@ def signup_view(request):
       if role == 'author':
         is_superuser =False 
         is_author =True
-
+        
       user = User.objects.create_user(username,email,password,is_superuser=is_superuser)
       user.first_name=fname
       user.last_name=lname
