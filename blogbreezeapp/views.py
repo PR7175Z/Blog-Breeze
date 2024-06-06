@@ -3,7 +3,7 @@ from django.template import loader
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Blog
+from .models import Blog, Category
 from django.shortcuts import render, redirect
 import re
 
@@ -117,12 +117,46 @@ def dashboardbloglist(request):
   return HttpResponse(template.render(context, request))
 
 def addblogpageloader(request):
-  if request.method == 'POST':
-    try:
-      blogtitle = request.post.get('blogtitle')
-      blogcontent = request.post.get('content')
-      featureimage = request.post.get('featuredimage')
-    except:
-      return render(request, 'login.html')
-  template = loader.get_template('addblog.html')
-  return HttpResponse(template.render())
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.user.is_superuser:
+        context = {'categories': Category.objects.all()}
+        
+        if request.method == 'POST':
+            try:
+                blogtitle = request.POST.get('blogtitle')
+                blogcontent = request.POST.get('content')
+                category_id = request.POST.get('category')
+                featureimage = request.POST.get('featuredimage')
+                authorid = request.user.id
+
+                # Validate the inputs
+                if not blogtitle or not blogcontent or not category_id or not featureimage:
+                    messages.error(request, "All fields are required.")
+                    return render(request, 'addblog.html', context)
+
+                category = Category.objects.get(id=category_id)
+
+                blog, created = Blog.objects.get_or_create(
+                    category=category,
+                    title=blogtitle,
+                    content=blogcontent,
+                    featuredimage=featureimage,
+                    authorid=authorid
+                )
+
+                if created:
+                    messages.success(request, "Your Blog Has Been Successfully Added!")
+                else:
+                    messages.warning(request, "A blog with this title already exists.")
+
+            except Category.DoesNotExist:
+                messages.error(request, "Selected category does not exist.")
+            except Exception as e:
+                messages.error(request, str(e))
+
+        return render(request, 'addblog.html', context)
+    
+    messages.error(request, 'Access Denied')
+    return redirect('/')
