@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -84,12 +85,12 @@ def signup_view(request):
         is_superuser =False 
         is_author =True
         
-      user = User.objects.create_user(username,email,password,is_superuser=is_superuser)
+      user = User.objects.create_user(username,email,password,is_superuser=is_superuser, )
       user.first_name=fname
       user.last_name=lname
       user.email = email
       user.phone = phone
-      user.is_author = is_author
+      user.is_staff = is_author
       user.save()
       
       if user is not None:
@@ -107,19 +108,22 @@ def signup_view(request):
     return render (request,'signup.html')
 
 def dashboardbloglist(request):
-  user = request.user
-  blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
-  template = loader.get_template('dashboardblog.html')
-  context = {
-    'blogs': blogs,
-  }
-  return HttpResponse(template.render(context, request))
+  if request.user.is_anonymous:
+    return redirect('/login')
+  else:
+    user = request.user
+    blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
+    template = loader.get_template('dashboardblog.html')
+    context = {
+      'blogs': blogs,
+    }
+    return HttpResponse(template.render(context, request))
 
 def addblogpageloader(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    if request.user.is_superuser:
+    if request.user.is_superuser or request.user.is_staff:
         context = {'categories': Category.objects.all()}
         
         if request.method == 'POST':
@@ -129,13 +133,6 @@ def addblogpageloader(request):
                 category_name = request.POST.get('category')
                 featuredimage = request.FILES.get('featuredimage')
                 authorid = request.user
-
-                # Debugging prints
-                print("Blog Title:", blogtitle)
-                print("Blog Content:", blogcontent)
-                print("Category Name:", category_name)
-                print("Featured Image:", featuredimage)
-                print("Author ID:", authorid)
 
                 # Validate the inputs
                 if not blogtitle or not blogcontent or category_name == "choose" or not featuredimage:
@@ -165,6 +162,46 @@ def addblogpageloader(request):
     
     messages.error(request, 'Access Denied')
     return redirect('/')
+
+
+#still issue remaining
+def editblogpageloader(request, id):
+  if request.user.is_anonymous:
+    return redirect('/login')
+  
+  bid = Blog.objects.get(id=id)
+  context = {
+    'blog': bid,
+    'categories': Category.objects.all()
+  }
+  if request.method == "POST":
+    try:
+      btitle = request.POST.get('blogtitle')
+      bcat = request.POST.get('category')
+      bcontent = request.POST.get('content')
+      bimg = request.FILES.get('featuredimage')
+      authorid = bid.authorid
+
+      if not btitle or not bcontent or bcat == "choose":
+        messages.error(request, "All fields are required.")
+        return render(request, 'addblog.html', context)
+      
+      blog = get_object_or_404(Blog, id=bid)
+
+      blog.title = btitle
+      blog.content = bcontent
+      blog.featuredimage = bimg
+      blog.category = bcat
+      blog.authorid = authorid
+
+      blog.save()
+
+      return redirect('/edit-blog/'+ str(id))
+      
+    except:
+      messages.error(request, "Issue updating")
+      return redirect('/edit-blog/' + str(id))
+  return render(request, 'editblog.html', context)
 
 def logout_view(request):
   logout(request)
