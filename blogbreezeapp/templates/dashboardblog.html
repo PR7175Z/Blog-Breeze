@@ -7,8 +7,30 @@
                 {% include 'dash-nav.html' %}
             </div>
             <div class="col-md-9">
+                <div class="add-blog-btn">
+                    <a href="/add-blog">Add blog</a>
+                </div>
                 <div class="dashboard-wrapper">
-                    <p>This is dashboard blog</p>
+                    <table>
+                        <thead>
+                            <th>S.N</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Author</th>
+                        </thead>
+                        <tbody>
+                            {% for x in blogs %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    <a href="/edit-blog/?bid={{x.id}}">{{ x.title }}</a>
+                                </td>
+                                <td>{{x.category}}</td>
+                                <td>{{x.authorid}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

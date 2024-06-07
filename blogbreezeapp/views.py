@@ -3,8 +3,9 @@ from django.template import loader
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Blog
+from .models import Blog, Category
 from django.shortcuts import render, redirect
+import re
 
 def indexpageloader(request):
   blogs = Blog.objects.all().order_by('-publishdate')
@@ -62,8 +63,7 @@ def dashboard_view(request):
   else:
     try:
       current_user = request.user
-      current_user_id = request.user.id
-      messages.success(request, f'Hello {current_user} {current_user_id}')
+      messages.success(request, f'Hello {current_user}')
       return render(request,"dashboard.html")
     except Exception as e:
       messages.error(request, str(e))
@@ -83,7 +83,7 @@ def signup_view(request):
       if role == 'author':
         is_superuser =False 
         is_author =True
-
+        
       user = User.objects.create_user(username,email,password,is_superuser=is_superuser)
       user.first_name=fname
       user.last_name=lname
@@ -107,9 +107,65 @@ def signup_view(request):
     return render (request,'signup.html')
 
 def dashboardbloglist(request):
-  blogs = Blog.objects.all().order_by('-publishdate')
+  user = request.user
+  blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
   template = loader.get_template('dashboardblog.html')
   context = {
     'blogs': blogs,
   }
   return HttpResponse(template.render(context, request))
+
+def addblogpageloader(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.user.is_superuser:
+        context = {'categories': Category.objects.all()}
+        
+        if request.method == 'POST':
+            try:
+                blogtitle = request.POST.get('blogtitle')
+                blogcontent = request.POST.get('content')
+                category_name = request.POST.get('category')
+                featuredimage = request.FILES.get('featuredimage')
+                authorid = request.user
+
+                # Debugging prints
+                print("Blog Title:", blogtitle)
+                print("Blog Content:", blogcontent)
+                print("Category Name:", category_name)
+                print("Featured Image:", featuredimage)
+                print("Author ID:", authorid)
+
+                # Validate the inputs
+                if not blogtitle or not blogcontent or category_name == "choose" or not featuredimage:
+                    messages.error(request, "All fields are required.")
+                    return render(request, 'addblog.html', context)
+
+                category = Category.objects.get(name=category_name)
+
+                blog = Blog(
+                    category=category,
+                    title=blogtitle,
+                    content=blogcontent,
+                    featuredimage=featuredimage,
+                    authorid=authorid
+                )
+                blog.save()
+
+                messages.success(request, "Your Blog Has Been Successfully Added!")
+                return redirect('/add-blog')  # Redirect to a blog list or success page after adding
+
+            except Category.DoesNotExist:
+                messages.error(request, "Selected category does not exist.")
+            except Exception as e:
+                messages.error(request, str(e))
+        
+        return render(request, 'addblog.html', context)
+    
+    messages.error(request, 'Access Denied')
+    return redirect('/')
+
+def logout_view(request):
+  logout(request)
+  return redirect('home')

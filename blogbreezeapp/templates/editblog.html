@@ -1,17 +1,17 @@
 {% include 'header.html' %}
-
-<section class="dashboard-cover">
+{% load static %}
+<section class="edit-blog-wrap">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 {% include 'dash-nav.html' %}
             </div>
             <div class="col-md-9">
-                <div class="dashboard-wrapper">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                    <p>This is dashboard</p>
+                <div class="tilte">
+                    <h1>Edit blog</h1>
+                </div>
+                <div class="edit-blog-form-wrap">
+                    <p>This is edit blog </p>
                 </div>
             </div>
         </div>
