@@ -11,10 +11,39 @@
                     <h1>Edit blog</h1>
                 </div>
                 <div class="edit-blog-form-wrap">
-                    <p>This is edit blog </p>
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                    <form action="/edit-blog/{{blog.id}}" method="post" enctype="multipart/form-data" runat="server">
+                        {% csrf_token %}
+                        <input type="text" name="blogtitle" id="blogtitle" value="{{blog.title}}" required>
+                        <label>
+                            <input type="file" style="visibility: hidden;" name="featuredimage" id="featuredimage" value="{{blog.featuredimage}}" required>
+                            <img src="{{blog.featuredimage.url}}" id="fimg">
+                        </label>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Choose Category</label>
+                            <select name="category" class="form-control" required>
+                                <option value="choose">Choose</option>
+                                {% for category in categories %}
+                                <option value="{{ category.name }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <textarea id="content" name="content" required>{{blog.content}} </textarea>
+                        <input type="submit" value="Update">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script>
+    featuredimage.onchange = evt => {
+        const [file] = featuredimage.files
+        if (file) {
+            fimg.src = URL.createObjectURL(file)
+        }
+    }
+</script>
 {% include 'footer.html' %}

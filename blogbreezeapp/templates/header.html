@@ -20,7 +20,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-4">
                         <div class="logo-brand">
-                            <a href="#" title="">
+                            <a href="/" title="">
                                 <img src="{% static 'images/logo.png' %}" alt="">
                             </a>
                         </div>
@@ -34,10 +34,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="" title="">
-                                    <span>Call Us</span>
-                                    <i class="fas icon-call"></i>
-                                </a>
+                                {% if user.is_authenticated %}
+                                    <a href="/dashboard" title="">
+                                        <span>{{user.first_name}}</span>
+                                    </a>
+                                {% else %}
+                                    <a href="/login" title="">
+                                        <span>Login</span>
+                                    </a>
+                                {% endif %}
                             </li>
                         </ul>
                     </div>
