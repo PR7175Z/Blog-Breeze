@@ -63,8 +63,7 @@ def dashboard_view(request):
   else:
     try:
       current_user = request.user
-      current_user_id = request.user.id
-      messages.success(request, f'Hello {current_user} {current_user_id}')
+      messages.success(request, f'Hello {current_user}')
       return render(request,"dashboard.html")
     except Exception as e:
       messages.error(request, str(e))
@@ -127,36 +126,46 @@ def addblogpageloader(request):
             try:
                 blogtitle = request.POST.get('blogtitle')
                 blogcontent = request.POST.get('content')
-                category_id = request.POST.get('category')
-                featureimage = request.POST.get('featuredimage')
-                authorid = request.user.id
+                category_name = request.POST.get('category')
+                featuredimage = request.FILES.get('featuredimage')
+                authorid = request.user
+
+                # Debugging prints
+                print("Blog Title:", blogtitle)
+                print("Blog Content:", blogcontent)
+                print("Category Name:", category_name)
+                print("Featured Image:", featuredimage)
+                print("Author ID:", authorid)
 
                 # Validate the inputs
-                if not blogtitle or not blogcontent or not category_id or not featureimage:
+                if not blogtitle or not blogcontent or category_name == "choose" or not featuredimage:
                     messages.error(request, "All fields are required.")
                     return render(request, 'addblog.html', context)
 
-                category = Category.objects.get(id=category_id)
+                category = Category.objects.get(name=category_name)
 
-                blog, created = Blog.objects.get_or_create(
+                blog = Blog(
                     category=category,
                     title=blogtitle,
                     content=blogcontent,
-                    featuredimage=featureimage,
+                    featuredimage=featuredimage,
                     authorid=authorid
                 )
+                blog.save()
 
-                if created:
-                    messages.success(request, "Your Blog Has Been Successfully Added!")
-                else:
-                    messages.warning(request, "A blog with this title already exists.")
+                messages.success(request, "Your Blog Has Been Successfully Added!")
+                return redirect('/add-blog')  # Redirect to a blog list or success page after adding
 
             except Category.DoesNotExist:
                 messages.error(request, "Selected category does not exist.")
             except Exception as e:
                 messages.error(request, str(e))
-
+        
         return render(request, 'addblog.html', context)
     
     messages.error(request, 'Access Denied')
     return redirect('/')
+
+def logout_view(request):
+  logout(request)
+  return redirect('home')

@@ -11,22 +11,25 @@
                     <h1>Add blog</h1>
                 </div>
                 <div class="add-blog-form-wrap">
-                    <form action="/addblog" method="post">
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                    <form action="/addblog" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="text" name="blogtitle" id="blogtitle" placeholder="Title">
-                        <input type="file" name="featuredimage" id="featuredimage">
+                        <input type="text" name="blogtitle" id="blogtitle" placeholder="Title" required>
+                        <input type="file" name="featuredimage" id="featuredimage" required>
                         <div class="mb-3">
                             <label for="category" class="form-label">Choose Topic</label>
-                            <select name="category" class="form-control">
+                            <select name="category" class="form-control" required>
                                 <option value="choose">Choose</option>
                                 {% for category in categories %}
-                                <option value="{{category.category_name}}">
-                                    {{category}}
+                                <option value="{{ category.name }}">
+                                    {{ category.name }}
                                 </option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <textarea id="content" name="content" placeholder="Content"></textarea>
+                        <textarea id="content" name="content" placeholder="Content" required></textarea>
                         <input type="submit" value="Publish">
                     </form>
                 </div>
