@@ -1,10 +1,16 @@
-{% include 'header.html' %}
-    <section class="blog-listing">
+{% include 'theme-temp/header.html' %}
+{% load static %}
+    <section class="inner-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
+        <div class="container position-relative">
+            <h1>BLOGS</h1>
+        </div>
+    </section>
+    <section class="blog-section section-gaps light-white-bg">
         <div class="container">
-            <div class="row">
+            <div class="row trek-list-box trek-list-box-slider blog-lists">
                 {% for x in blogs %}
                 <div class="col-md-3">
-                    {% include 'blog-content.html' %}
+                    {% include 'template-parts/blog-content.html' %}
                 </div>
                 {% empty %}
                 <p>No members</p>
@@ -12,4 +18,4 @@
             </div>
         </div>
     </section>
-{% include 'footer.html' %}
+{% include 'theme-temp/footer.html' %}
