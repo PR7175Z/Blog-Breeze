@@ -1,4 +1,4 @@
-{% include 'header.html' %} 
+{% include 'theme-temp/header.html' %} 
 {% load static %}
 <section class="main-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
     <div class="container position-relative">
@@ -57,7 +57,7 @@
         <div class="trek-list-box trek-list-box-slider blog-lists row">
             {% for x in blogs %}
             <div class="col-md-4">
-                {% include 'blog-content.html' %}
+                {% include 'template-parts/blog-content.html' %}
             </div>
             {% endfor %}
         </div>
@@ -96,4 +96,4 @@
         <img src="images/footer-logo.png" alt="">
     </div>
 </section>
-{% include 'footer.html' %} 
+{% include 'theme-temp/footer.html' %} 

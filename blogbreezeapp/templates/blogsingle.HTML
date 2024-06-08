@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'theme-temp/header.html' %}
 <section class="inner-about-sections section-gaps">
     <div class="container ">
         <div class="blog-content">
@@ -75,11 +75,11 @@
             <div class="row trek-gap">
                 {% for x in otherblog %}
                 <div class="col-md-4">
-                    {% include 'similarblog.html' %}
+                    {% include 'template-parts/similarblog.html' %}
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
-{% include 'footer.html' %}
+{% include 'theme-temp/footer.html' %}

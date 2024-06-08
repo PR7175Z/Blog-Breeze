@@ -12,5 +12,6 @@ urlpatterns = [
     path('dashboard-blog', views.dashboardbloglist, name="dashboardblog"),
     path('add-blog', views.addblogpageloader, name="addblog"),
     path('edit-blog/<int:id>', views.editblogpageloader, name="editblog"),
+    path('dashboard-cat', views.dashboardcatlist, name="dashboardcat"),
     path('logout', views.logout_view, name="logout")
 ]

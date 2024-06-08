@@ -166,43 +166,52 @@ def addblogpageloader(request):
 
 #still issue remaining
 def editblogpageloader(request, id):
-  if request.user.is_anonymous:
-    return redirect('/login')
-  
-  bid = Blog.objects.get(id=id)
-  context = {
-    'blog': bid,
-    'categories': Category.objects.all()
-  }
-  if request.method == "POST":
-    try:
-      btitle = request.POST.get('blogtitle')
-      bcat = request.POST.get('category')
-      bcontent = request.POST.get('content')
-      bimg = request.FILES.get('featuredimage')
-      authorid = bid.authorid
-
-      if not btitle or not bcontent or bcat == "choose":
-        messages.error(request, "All fields are required.")
-        return render(request, 'addblog.html', context)
-      
-      blog = get_object_or_404(Blog, id=bid)
-
-      blog.title = btitle
-      blog.content = bcontent
-      blog.featuredimage = bimg
-      blog.category = bcat
-      blog.authorid = authorid
-
-      blog.save()
-
-      return redirect('/edit-blog/'+ str(id))
-      
-    except:
-      messages.error(request, "Issue updating")
-      return redirect('/edit-blog/' + str(id))
-  return render(request, 'editblog.html', context)
+    if request.user.is_anonymous:
+        return redirect('/login')
+    
+    blog = get_object_or_404(Blog, id=id)
+    context = {
+        'blog': blog,
+        'categories': Category.objects.all()
+    }
+    
+    if request.method == "POST":
+        btitle = request.POST.get('blogtitle')
+        bcat = request.POST.get('category')
+        bcontent = request.POST.get('content')
+        bimg = request.FILES.get('featuredimage')
+        
+        try:
+            blog.title = btitle
+            blog.content = bcontent
+            
+            if bimg:
+                blog.featuredimage = bimg
+            
+            blog.category = get_object_or_404(Category)
+            blog.save()
+            
+            messages.success(request, "Blog updated successfully!")
+            return redirect('/edit-blog/' + str(id))
+            
+        except Exception as e:
+            messages.error(request, f"Issue updating: {e}")
+            return redirect('/edit-blog/' + str(id))
+    
+    return render(request, 'editblog.html', context)
 
 def logout_view(request):
   logout(request)
   return redirect('home')
+
+def dashboardcatlist(request):
+  if request.user.is_anonymous:
+    return redirect('/login')
+  else:
+    user = request.user
+    cat = Category.objects.all().order_by('name')
+    template = loader.get_template('dash-cat-list.html')
+    context = {
+      'categories': cat,
+    }
+    return HttpResponse(template.render(context, request))
