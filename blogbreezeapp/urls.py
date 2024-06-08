@@ -13,5 +13,6 @@ urlpatterns = [
     path('add-blog', views.addblogpageloader, name="addblog"),
     path('edit-blog/<int:id>', views.editblogpageloader, name="editblog"),
     path('dashboard-cat', views.dashboardcatlist, name="dashboardcat"),
+    path('dashboard-addcat', views.addcatloader, name="addcat"),
     path('logout', views.logout_view, name="logout")
 ]

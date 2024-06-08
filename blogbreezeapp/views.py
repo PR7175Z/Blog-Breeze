@@ -120,48 +120,48 @@ def dashboardbloglist(request):
     return HttpResponse(template.render(context, request))
 
 def addblogpageloader(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
+  if request.user.is_anonymous:
+      return redirect("/login")
 
-    if request.user.is_superuser or request.user.is_staff:
-        context = {'categories': Category.objects.all()}
-        
-        if request.method == 'POST':
-            try:
-                blogtitle = request.POST.get('blogtitle')
-                blogcontent = request.POST.get('content')
-                category_name = request.POST.get('category')
-                featuredimage = request.FILES.get('featuredimage')
-                authorid = request.user
+  if request.user.is_superuser or request.user.is_staff:
+      context = {'categories': Category.objects.all()}
+      
+      if request.method == 'POST':
+          try:
+              blogtitle = request.POST.get('blogtitle')
+              blogcontent = request.POST.get('content')
+              category_name = request.POST.get('category')
+              featuredimage = request.FILES.get('featuredimage')
+              authorid = request.user
 
-                # Validate the inputs
-                if not blogtitle or not blogcontent or category_name == "choose" or not featuredimage:
-                    messages.error(request, "All fields are required.")
-                    return render(request, 'addblog.html', context)
+              # Validate the inputs
+              if not blogtitle or not blogcontent or category_name == "choose" or not featuredimage:
+                  messages.error(request, "All fields are required.")
+                  return render(request, 'addblog.html', context)
 
-                category = Category.objects.get(name=category_name)
+              category = Category.objects.get(name=category_name)
 
-                blog = Blog(
-                    category=category,
-                    title=blogtitle,
-                    content=blogcontent,
-                    featuredimage=featuredimage,
-                    authorid=authorid
-                )
-                blog.save()
+              blog = Blog(
+                  category=category,
+                  title=blogtitle,
+                  content=blogcontent,
+                  featuredimage=featuredimage,
+                  authorid=authorid
+              )
+              blog.save()
 
-                messages.success(request, "Your Blog Has Been Successfully Added!")
-                return redirect('/add-blog')  # Redirect to a blog list or success page after adding
+              messages.success(request, "Your Blog Has Been Successfully Added!")
+              return redirect('/add-blog')  # Redirect to a blog list or success page after adding
 
-            except Category.DoesNotExist:
-                messages.error(request, "Selected category does not exist.")
-            except Exception as e:
-                messages.error(request, str(e))
-        
-        return render(request, 'addblog.html', context)
-    
-    messages.error(request, 'Access Denied')
-    return redirect('/')
+          except Category.DoesNotExist:
+              messages.error(request, "Selected category does not exist.")
+          except Exception as e:
+              messages.error(request, str(e))
+      
+      return render(request, 'addblog.html', context)
+  
+  messages.error(request, 'Access Denied')
+  return redirect('/')
 
 
 #still issue remaining
@@ -208,10 +208,41 @@ def dashboardcatlist(request):
   if request.user.is_anonymous:
     return redirect('/login')
   else:
-    user = request.user
     cat = Category.objects.all().order_by('name')
     template = loader.get_template('dash-cat-list.html')
     context = {
       'categories': cat,
     }
     return HttpResponse(template.render(context, request))
+  
+def addcatloader(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    
+    if request.user.is_superuser or request.user.is_staff:        
+        if request.method == 'POST':
+            try:
+                title = request.POST.get('categorytitle')
+                content = request.POST.get('categorycontent')
+                authorid = request.user
+
+                # Validate the inputs
+                if not title:
+                    messages.error(request, "Title is required.")
+                    return render(request, 'add-category.html')
+                cat = Category(
+                    name=title,
+                    content=content,
+                    author=authorid
+                )
+                cat.save()
+
+                messages.success(request, "Your Category Has Been Successfully Added!")
+                return redirect('/dashboard-addcat')  # Redirect to a blog list or success page after adding
+            except Exception as e:
+                messages.error(request, str(e))
+        
+        return render(request, 'add-category.html')
+    
+    messages.error(request, 'Access Denied')
+    return redirect('/')
