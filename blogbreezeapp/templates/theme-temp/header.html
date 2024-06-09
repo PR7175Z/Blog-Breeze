@@ -36,7 +36,13 @@
                             <li>
                                 {% if user.is_authenticated %}
                                     <a href="/dashboard" title="">
-                                        <span>{{user.first_name}}</span>
+                                        <span>
+                                            {% if user.first_name|length > 0 %}
+                                                {{user.first_name}}
+                                            {% else %}
+                                                {{user.username}}
+                                            {% endif %}
+                                        </span>
                                     </a>
                                 {% else %}
                                     <a href="/login" title="">

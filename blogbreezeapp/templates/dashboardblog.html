@@ -7,6 +7,9 @@
                 {% include 'template-parts/dash-nav.html' %}
             </div>
             <div class="col-md-9">
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
                 <div class="add-blog-btn">
                     <a href="/add-blog">Add blog</a>
                 </div>
@@ -17,6 +20,7 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Author</th>
+                            <th>Delete</th>
                         </thead>
                         <tbody>
                             {% for x in blogs %}
@@ -27,7 +31,10 @@
                                 </td>
                                 <td>{{x.category}}</td>
                                 <td>{{x.authorid}}</td>
+                                <td><a href="/delete-blog/{{x.id}}">Delete</a></td>
                             </tr>
+                            {% empty %}
+                                <tr><td colspan="5">Sorry, you don't have a blog</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>

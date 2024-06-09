@@ -112,7 +112,10 @@ def dashboardbloglist(request):
     return redirect('/login')
   else:
     user = request.user
-    blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
+    if request.user.is_superuser:
+      blogs = Blog.objects.all().order_by('-publishdate')
+    else:
+      blogs = Blog.objects.filter(authorid=user).order_by('-publishdate')
     template = loader.get_template('dashboardblog.html')
     context = {
       'blogs': blogs,
@@ -246,3 +249,12 @@ def addcatloader(request):
     
     messages.error(request, 'Access Denied')
     return redirect('/')
+
+def deleteblogpage(request, id):
+  try:
+    delobj = Blog.objects.get(id=id)
+    delobj.delete()
+    messages.success(request, "Deletion Successful")
+    return redirect('/dashboard-blog')
+  except Exception as e:
+    messages.error(request, "Deletion Unsuccessful")

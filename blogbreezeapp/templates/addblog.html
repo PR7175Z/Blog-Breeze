@@ -17,7 +17,10 @@
                     <form action="/add-blog" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="blogtitle" id="blogtitle" placeholder="Title" required>
-                        <input type="file" name="featuredimage" id="featuredimage" required>
+                        <label>
+                            <input type="file" style="visibility: hidden;" name="featuredimage" id="featuredimage" value="{{blog.featuredimage}}">
+                            <img src="{{blog.featuredimage.url}}" id="fimg" alt="img">
+                        </label>
                         <div class="mb-3">
                             <label for="category" class="form-label">Choose Category</label>
                             <select name="category" class="form-control" required>

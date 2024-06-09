@@ -38,12 +38,4 @@
         </div>
     </div>
 </section>
-<script>
-    featuredimage.onchange = evt => {
-        const [file] = featuredimage.files
-        if (file) {
-            fimg.src = URL.createObjectURL(file)
-        }
-    }
-</script>
 {% include 'theme-temp/footer.html' %}
