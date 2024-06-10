@@ -1,0 +1,19 @@
+{% include 'theme-temp/header.html' %}
+
+<section class="dashboard-cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'template-parts/dash-nav.html' %}
+            </div>
+            <div class="col-md-9">
+                <div class="dashboard-wrapper">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'theme-temp/footer.html' %}
