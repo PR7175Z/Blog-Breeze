@@ -15,7 +15,7 @@
                 <div class="category-wrapper">
                     <ul>
                         {% for cat in categories %}
-                            <li>{{cat}}</li>
+                            <li><a href="dashboard-editcat/{{cat.id}}">{{cat}}</a> <a href="dashboard-delcat/{{cat.id}}">Delete</a> </li>
                         {% endfor %}
                     </ul>
                 </div>

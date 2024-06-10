@@ -251,6 +251,8 @@ def addcatloader(request):
     return redirect('/')
 
 def deleteblogpage(request, id):
+  if request.user.is_anonymous:
+        return redirect('/login')
   try:
     delobj = Blog.objects.get(id=id)
     delobj.delete()
@@ -258,3 +260,96 @@ def deleteblogpage(request, id):
     return redirect('/dashboard-blog')
   except Exception as e:
     messages.error(request, "Deletion Unsuccessful")
+
+def editcategorypage(request, id):
+    if request.user.is_anonymous:
+        return redirect('/login')
+    
+    category = Category.objects.get(id=id)
+
+    context = {
+        'cat': category
+    }
+    if request.user.is_superuser or request.user.is_staff:    
+      if request.method == "POST":
+          cattitle = request.POST.get('categorytitle')
+          catcontent = request.POST.get('categorycontent')
+          
+          try:
+              category.title = cattitle
+              category.content = catcontent
+              category.save()
+              
+              messages.success(request, "category updated successfully!")
+              return redirect('/dashboard-editcat/' + str(id))
+              
+          except Exception as e:
+              messages.error(request, f"Issue updating: {e}")
+              return redirect('/dashboard-editcat/' + str(id))
+      
+      return render(request, 'edit-category.html', context)
+    messages.error(request, 'Access Denied')
+    return redirect('/')
+
+def deletecategorypage(request, id):
+  if request.user.is_anonymous:
+        return redirect('/login')
+  try:
+    delobj = Category.objects.get(id=id)
+    delobj.delete()
+    messages.success(request, "Deletion Successful")
+    return redirect('/dashboard-cat')
+  except Exception as e:
+    messages.error(request, "Deletion Unsuccessful")
+
+def userlistpage(request):
+  if request.user.is_anonymous:
+    return redirect('/login')
+  
+  user = User.objects.all().order_by('first_name')
+  template = loader.get_template('dashboard-userlist.html')
+  context = {
+    'users': user,
+  }
+  return HttpResponse(template.render(context, request))
+
+def adduserpage(request):
+  if request.user.is_anonymous:
+    return redirect('/login')
+  
+  if not request.user.is_superuser:
+    messages.error(request, 'Access Denied')
+    return redirect('/')
+  
+  if request.method == 'POST':
+    try:
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Validate the inputs
+        if not firstname or not username or not email or not phone or not password:
+            messages.error(request, "All fields are required.")
+            return render(request, 'adduser.html')
+
+        user = User(
+            first_name=firstname,
+            last_name=lastname,
+            username=username,
+            email=email,
+            is_staff = True
+        )
+        user.set_password(password)  # Proper way to set password
+        user.save()
+
+        messages.success(request, "Your User Has Been Successfully Added!")
+        return redirect('/dashboard-adduser')  # Redirect to a blog list or success page after adding
+
+    except Exception as e:
+        messages.error(request, str(e))
+        return render(request, 'adduser.html')
+
+  return render(request, 'adduser.html')  # Show the form if it's a GET request or if an error occurs

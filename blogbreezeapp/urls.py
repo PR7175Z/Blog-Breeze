@@ -15,5 +15,9 @@ urlpatterns = [
     path('delete-blog/<int:id>', views.deleteblogpage, name="delblog"),
     path('dashboard-cat', views.dashboardcatlist, name="dashboardcat"),
     path('dashboard-addcat', views.addcatloader, name="addcat"),
+    path('dashboard-editcat/<int:id>', views.editcategorypage, name="editcat"),
+    path('dashboard-delcat/<int:id>', views.deletecategorypage, name="deletecat"),
+    path('dashboard-user', views.userlistpage, name="dashboarduser"),
+    path('dashboard-adduser', views.adduserpage, name="dashboardadduser"),
     path('logout', views.logout_view, name="logout")
 ]

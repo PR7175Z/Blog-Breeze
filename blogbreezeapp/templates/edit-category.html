@@ -1,0 +1,25 @@
+{% include 'theme-temp/header.html' %}
+
+<section class="dashboard-cover">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'template-parts/dash-nav.html' %}
+            </div>
+            <div class="col-md-9">
+                <div class="dashboard-wrapper">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <form action="/dashboard-editcat/{{cat.id}}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="categorytitle" id="categorytitle" placeholder="Title" value="{{cat.name}}" required>
+                        <textarea id="categorycontent" name="categorycontent" placeholder="Content">{{cat.content}}</textarea>
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'theme-temp/footer.html' %}
