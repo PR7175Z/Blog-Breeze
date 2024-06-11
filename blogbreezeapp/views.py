@@ -226,6 +226,7 @@ def addcatloader(request):
         if request.method == 'POST':
             try:
                 title = request.POST.get('categorytitle')
+                fimg = request.FILES.get('featuredimage')
                 content = request.POST.get('categorycontent')
                 authorid = request.user
 
@@ -235,6 +236,7 @@ def addcatloader(request):
                     return render(request, 'add-category.html')
                 cat = Category(
                     name=title,
+                    featuredimage = fimg,
                     content=content,
                     author=authorid
                 )
@@ -273,11 +275,13 @@ def editcategorypage(request, id):
     if request.user.is_superuser or request.user.is_staff:    
       if request.method == "POST":
           cattitle = request.POST.get('categorytitle')
+          fimg = request.FILES.get('featuredimage')
           catcontent = request.POST.get('categorycontent')
           
           try:
-              category.title = cattitle
+              category.name = cattitle
               category.content = catcontent
+              category.featuredimage = fimg
               category.save()
               
               messages.success(request, "category updated successfully!")

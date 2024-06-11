@@ -1,5 +1,5 @@
 {% include 'theme-temp/header.html' %}
-
+{% load static %}
 <section class="dashboard-cover">
     <div class="container">
         <div class="row">
@@ -14,6 +14,11 @@
                     <form action="/dashboard-editcat/{{cat.id}}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="categorytitle" id="categorytitle" placeholder="Title" value="{{cat.name}}" required>
+                        <label>
+                            Featured image: 
+                            <input type="file" style="visibility: hidden;" name="featuredimage" id="featuredimage" value="{{cat.featuredimage.url}}">
+                            <img src="{% if cat.featuredimage|length > 0 %}{{cat.featuredimage.url}}{% else %}{% static 'images/default.png'%}{% endif %}" id="fimg" alt="img">
+                        </label>
                         <textarea id="categorycontent" name="categorycontent" placeholder="Content">{{cat.content}}</textarea>
                         <input type="submit" value="Save">
                     </form>

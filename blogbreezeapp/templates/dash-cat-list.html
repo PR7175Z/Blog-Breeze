@@ -15,7 +15,10 @@
                 <div class="category-wrapper">
                     <ul>
                         {% for cat in categories %}
-                            <li><a href="dashboard-editcat/{{cat.id}}">{{cat}}</a> <a href="dashboard-delcat/{{cat.id}}">Delete</a> </li>
+                            <li>
+                                <img src="{% if cat.featuredimage|length > 0 %}{{cat.featuredimage.url}}{% else %}{% static 'images/default.png'%}{% endif %}" >
+                                <a href="dashboard-editcat/{{cat.id}}">{{cat}}</a> <a href="dashboard-delcat/{{cat.id}}">Delete</a> 
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

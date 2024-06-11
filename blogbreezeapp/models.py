@@ -7,6 +7,7 @@ import uuid
 class Category(models.Model):
   name = models.CharField(max_length=30)
   content = HTMLField(default = '')
+  featuredimage = models.ImageField(upload_to='uploads/', default=0) 
   author = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
   def __str__(self):
