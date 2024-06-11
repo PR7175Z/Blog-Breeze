@@ -14,6 +14,11 @@
                     <form action="/dashboard-addcat" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="categorytitle" id="categorytitle" placeholder="Title" required>
+                        <label>
+                            Featured image: 
+                            <input type="file" style="visibility: hidden;" name="featuredimage" id="featuredimage">
+                            <img src="" id="fimg" alt="img">
+                        </label>
                         <textarea id="categorycontent" name="categorycontent" placeholder="Content"></textarea>
                         <input type="submit" value="Save">
                     </form>
