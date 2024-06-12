@@ -10,9 +10,11 @@ import re
 
 def indexpageloader(request):
   blogs = Blog.objects.all().order_by('-publishdate')
+  categories = Category.objects.all().order_by('name')
   template = loader.get_template('index.html')
   context = {
     'blogs': blogs,
+    'categories': categories,
   }
   return HttpResponse(template.render(context, request))
 
@@ -350,10 +352,22 @@ def adduserpage(request):
         user.save()
 
         messages.success(request, "Your User Has Been Successfully Added!")
-        return redirect('/dashboard-adduser')  # Redirect to a blog list or success page after adding
+        return redirect('/dashboard-adduser') 
 
     except Exception as e:
         messages.error(request, str(e))
         return render(request, 'adduser.html')
 
-  return render(request, 'adduser.html')  # Show the form if it's a GET request or if an error occurs
+  return render(request, 'adduser.html') 
+
+def categorylistingpageloader(request, id):
+  catsingle = Category.objects.get(id=id)
+  other_cat = Category.objects.exclude(id=id).order_by('?')[:3]
+  blogs = Blog.objects.filter(category=id)
+  template = loader.get_template('categorysingle.html')
+  context = {
+    'blogs' : blogs,
+    'cat': catsingle,
+    'othercat':other_cat,
+  }
+  return HttpResponse(template.render(context, request))

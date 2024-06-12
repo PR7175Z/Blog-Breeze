@@ -27,18 +27,9 @@
 
         <div class="places-list-box">
             <div class="row item-5-col">
-                <div class="col-lg-2">
-                    <a href="" title="" class="item">
-                        <div class="img-holder">
-                            <img src="{% static 'images/place1.png'%}" alt="" class="img-cover">
-                            <div class="content">
-                                <h3 class="title">
-                                    Kathmandu
-                                </h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                {% for cat in categories %}
+                    {% include 'template-parts/cat-listcontent.html' %} 
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -1,0 +1,41 @@
+{% include 'theme-temp/header.html' %}
+{% load static %}
+<section class="inner-banner  align-items-center d-flex" style="background-image: url('{{cat.featuredimage.url}}')">
+    <div class="container position-relative">
+        <h1>{{cat}}</h1>
+    </div>
+</section>
+
+<section class="category-section section-gaps light-white-bg">
+    <div class="container">
+        <div class="row trek-list-box trek-list-box-slider blog-lists">
+            {% for x in blogs %}
+            <div class="col-md-3">
+                {% include 'template-parts/similarblog.html' %}
+            </div>
+            {% empty %}
+            <p>No members</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="popular-sections section-gaps">
+    <div class="container ">
+        <div class="main-title mb-5">
+            <h2 class="sub-title mb-4">
+                Other Categories
+            </h2>
+        </div>
+
+        <div class="places-list-box">
+            <div class="row item-5-col">
+                {% for cat in othercat %}
+                    {% include 'template-parts/cat-listcontent.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'theme-temp/footer.html' %}

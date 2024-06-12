@@ -1,0 +1,14 @@
+{% load static %}
+
+<div class="col-lg-2">
+    <a href="category/{{cat.id}}" title="" class="item">
+        <div class="img-holder">
+            <img src="{% if cat.featuredimage|length > 0 %}{{cat.featuredimage.url}}{% else %}{% static 'images/default.png'%}{% endif %}" alt="{{cat}} image" class="img-cover">
+            <div class="content">
+                <h3 class="title">
+                    {{cat}}
+                </h3>
+            </div>
+        </div>
+    </a>
+</div>
