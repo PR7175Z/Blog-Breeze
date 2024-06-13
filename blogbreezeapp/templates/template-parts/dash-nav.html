@@ -1,14 +1,16 @@
-<ul>
-    <li><a href="/dashboard">Dashboard</a></li>
-    <li>
-        <a href="/dashboard-blog">Blogs</a>
-        <ul>
-            <li><a href="/add-blog">Add Blog</a></li>
-            <li><a href="/dashboard-cat">Category</a></li>
-        </ul>
-    </li>
-    {% if user.is_superuser %}
-        <li><a href="/dashboard-user">User</a></li>
-    {% endif %}
-    <li><a href="/logout">Logout</a></li>
-</ul>
+<div class="dashboard-menu">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li>
+            <a href="/dashboard-blog">Blogs</a>
+            <ul>
+                <li><a href="/add-blog">Add Blog</a></li>
+                <li><a href="/dashboard-cat">Category</a></li>
+            </ul>
+        </li>
+        {% if user.is_superuser %}
+            <li><a href="/dashboard-user">User</a></li>
+        {% endif %}
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>

@@ -360,7 +360,7 @@ def adduserpage(request):
 
   return render(request, 'adduser.html') 
 
-def categorylistingpageloader(request, id):
+def categorysinglepageloader(request, id):
   catsingle = Category.objects.get(id=id)
   other_cat = Category.objects.exclude(id=id).order_by('?')[:3]
   blogs = Blog.objects.filter(category=id)
@@ -369,5 +369,13 @@ def categorylistingpageloader(request, id):
     'blogs' : blogs,
     'cat': catsingle,
     'othercat':other_cat,
+  }
+  return HttpResponse(template.render(context, request))
+
+def categorypageloader(request):
+  categories = Category.objects.all().order_by('name')
+  template = loader.get_template('categorylist.html')
+  context = {
+    'categories': categories,
   }
   return HttpResponse(template.render(context, request))

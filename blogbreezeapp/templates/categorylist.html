@@ -1,0 +1,21 @@
+{% include 'theme-temp/header.html' %}
+{% load static %}
+    <section class="inner-banner  align-items-center d-flex" style="background-image: url({% static 'images/banner.png'%})">
+        <div class="container position-relative">
+            <h1>Categories</h1>
+        </div>
+    </section>
+    <section class="popular-sections section-gaps">
+        <div class="container">
+            <div class="places-list-box">
+                <div class="row item-5-col">
+                    {% for cat in categories %}
+                        {% include 'template-parts/cat-listcontent.html' %} 
+                    {% empty %}
+                        No Categories
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% include 'theme-temp/footer.html' %}

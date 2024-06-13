@@ -1,13 +1,12 @@
 {% include 'theme-temp/header.html' %}
 
 <section class="dashboard-cover">
-    <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 pt-5 pb-5" style="background: #615e5e; color:#fff;">
                 {% include 'template-parts/dash-nav.html' %}
             </div>
-            <div class="col-md-9">
-                <div class="dashboard-wrapper">
+            <div class="col-md-9 pt-5 pb-5">
+                <div class="dashboard-wrapper light-white-bg">
                     {% for message in messages %}
                         <p>{{ message }}</p>
                     {% endfor %}
