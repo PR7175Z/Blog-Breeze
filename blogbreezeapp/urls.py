@@ -19,6 +19,7 @@ urlpatterns = [
     path('dashboard-delcat/<int:id>', views.deletecategorypage, name="deletecat"),
     path('dashboard-user', views.userlistpage, name="dashboarduser"),
     path('dashboard-adduser', views.adduserpage, name="dashboardadduser"),
-    path('category/<int:id>', views.categorylistingpageloader, name="catsingle"),
+    path('category/<int:id>', views.categorysinglepageloader, name="catsingle"),
+    path('category', views.categorypageloader, name="category"),
     path('logout', views.logout_view, name="logout")
 ]
