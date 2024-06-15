@@ -1,9 +1,30 @@
 {% include 'theme-temp/header.html' %}
+{% load static %}
 
-<section class="contact-us-section">
-    <div class="container">
-        <div class="">
-            <h1>This is contact</h1>
+<section class="contact-us-section inner-banner  align-items-center d-flex" style="background-image: url('{{cat.featuredimage.url}}')">
+    <div class="container container position-relative">
+        <h1>This is contact</h1>
+    </div>
+</section>
+
+<section class="popular-sections section-gaps">
+    <div class="container ">
+        <div class="main-title mb-5">
+            <h2 class="sub-title mb-4">
+                Get in Touch
+            </h2>
+        </div>
+
+        <div class="places-list-box">
+            <div class="row item-5-col">
+                <form action="" method="post">
+                    <input type="text" name="firstname" id="firstname" placeholder="First name">
+                    <input type="text" name="lastname" id="lastname" placeholder="Last name">
+                    <input type="text" name="subject" id="subject" placeholder="Subject">
+                    <textarea name="message" id="message" placeholder="Type your message here"></textarea>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
         </div>
     </div>
 </section>
